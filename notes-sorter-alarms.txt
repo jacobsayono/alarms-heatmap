@@ -1,0 +1,34 @@
+Conveyor-Related:
+
+    ConvA:
+        DisconnectOff_NoES
+        Maint
+        PE1_Jam
+        VFDFault_NoES
+    ConvB:
+        Maint
+        PE1_Jam
+        PE4_Jam (only in Sorter 3)
+        ENCFault (only in Sorter 2)
+        Enc_Ct_High (only in Sorter 2)
+        Enc_Fault (only in Sorter 2)
+    ConvC:
+        DisconnectOff_NoES
+        Maint
+        VFDFault_NoES
+
+General Faults:
+
+    FMPCS_Comm_Fault
+
+Photo Eye (PE) Jam Errors:
+
+Unique PE Jam points across all sorters:
+PE1, PE2, PE3, PE6, PE9, PE10, PE11, PE12, PE13, PE14, PE15, PE16, PE17, PE18, PE20, PE22, PE23, PE24, PE26, PE27, PE28, PE29, PE30, PE31, PE32, PE33, PE34, PE35, PE36, PE38, PE41, PE43, PE45, PE46, PE48, PE49, PE50, PE51, PE52, PE53, PE54, PE55, PE56, PE58, PE59, PE60, PE61, PE62, PE63, PE64, PE65, PE66, PE67, PE69, PE70, PE71, PE72
+Sorter-Specific Issues:
+
+    Sorter_Divert_67_Pin_Fault
+    Sorter_Divert_7_Pin_Fault
+    Sorter_Exit_Pin_Detect_Fault
+    Sorter_Group_Prox
+    Sorter_Shoe_Check

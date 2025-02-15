@@ -1,0 +1,2 @@
+- identify true vs. false alarm; primary vs. secondary alarms
+- bins full and how many packages go to it

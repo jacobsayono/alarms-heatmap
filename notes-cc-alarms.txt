@@ -1,0 +1,64 @@
+Bin Errors and Timeouts:
+
+	Bin_ARight_BinNotPresentTimeout
+	Bin_BRight_BinNotPresentTimeout
+	Bin_BRight_BinNotResumedTimeout
+	Bin_BRight_Full
+	Bin_ALeft_BinNotPresentTimeout
+	Bin_BLeft_BinNotPresentTimeout
+	Bin_BLeft_BinNotResumedTimeout
+	Bin_BLeft_Full
+	Bin_BRight_Full
+
+Conv Jam and Chute Errors:
+
+	Conv12Jam
+	Conv23Jam
+	Conv34Jam
+	Conv1_ChuteFull
+	Conv1_ChuteJam
+	Conv2_ChuteFull
+	Conv2_ChuteJam
+	Conv3_ChuteFull
+	Conv3_ChuteJam
+	Conv4_ChuteFull
+	Conv4_ChuteJam
+	Conv5_ChuteFull
+	Conv5_ChuteJam
+	Conv6_ChuteFull
+	Conv6_ChuteJam
+	Conv7_ChuteFull
+	Conv7_ChuteJam
+	Conv8_ChuteFull
+	Conv8_ChuteJam
+
+CC Heartbeats:
+
+	CC_Heartbeat
+	CC_Heartbeat_1
+
+Faults and MDS (Motor Drive System):
+
+	Conv1_Fault
+	Conv2_Fault
+	Conv3_Fault
+	Conv4_Fault
+	Conv5_Fault
+	Conv6_Fault
+	MDR1_Fault
+	MDR2_Fault
+	MDR3_Fault
+	Conv1_MDS
+	Conv2_MDS
+	Conv3_MDS
+	Conv4_MDS
+	Conv5_MDS
+	Conv6_MDS
+
+Output Jam and Paused States:
+
+	OutputBJam
+	OutputBPaused
+	OutputBDivertTimeout
+	OutputAJam
+	OutputAPaused

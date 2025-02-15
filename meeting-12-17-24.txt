@@ -1,0 +1,24 @@
+gabe wants data validation:
+- does data matches real world application? how did we test that?
+- validate alarms e.g. accuracy of time difference (internal clock not important), accuracy of trigger events
+
+example of identifying an error:
+- matt isaac fixed code on full-bin events (for bins 7-50) when the we found out that these alarms are not being logged
+
+e-stop signal logic:
+1) estop button/pullcord activated by human operator
+2) local plc stops sending signal to retiina plc (i.e. retiina does not receive a signal)
+3) retiina plc stops sending signal to all connected plc
+4) all connected plc stops because it no longer receives a signal
+
+e-stop double contact architecture:
+1) korber  --- +24V ---> retiina <--- +24V ---  fives
+2) korber <--- +24V ---  retiina  --- +24V ---> fives
+e.g. retiina loses input from korber -> retiina stops sending signals to all other connected devices -> then all devices stop.
+
+
+
+
+
+
+

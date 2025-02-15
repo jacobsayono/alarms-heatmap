@@ -1,0 +1,31 @@
+Connection Faults
+
+    General: AL0_DISCONN_OFF, AL0_DR_CONN_FLT, D0_DR_CONN_FLT, D1_DR_CONN_FLT, etc.
+    Motor Groups: MG1_DISCONN_OFF, MG1_DR_CONN_FLT, MG2_DR_CONN_FLT, etc.
+    Gaps and Miscellaneous: GAP_500RIO_CONN_FLT.
+
+Motor Overloads
+
+    Main Motors: D4_MOTR_OVRLD, D5_MOTR_OVRLD, F3_MOTR_OVRLD.
+    Groups: G1_MOTR_OVRLD, G2_MOTR_OVRLD, etc., up to G10_MOTR_OVRLD.
+    Miscellaneous: PG1_MOTR_OVRLD, MG1_MOTR_OVRLD.
+
+E-Stop Status
+
+    Active: ESS1_EStop_Active, ESS2_EStop_Active, etc.
+    Not Reset: ESS1_EStop_NotReset, ESS2_EStop_NotReset, etc.
+    MCP: MCP_ESTOP_NOTRESET, MCP_EStop_Active.
+
+Photo Eye Jams
+
+    Groups: G1_PHTEYE_JAM, G2_PHTEYE_JAM, etc., up to G10_PHTEYE_JAM.
+    Miscellaneous: MG4_PHTEYE_JAM, PG1_PHTEYE_JAM, VIS_PHTEYE_JAM_FLT.
+
+Visual and System Faults
+
+    Camera/System Issues: VIS_CAM_FLT, VIS_SYS_FLT.
+    Other: VIS_ESTOP, VIS_ESTOP_NOTRESET, VIS_MTRX_BED_BLT_FLT.
+
+Miscellaneous Alarms
+
+    CAP_MAINT_MODE, LOST_VIS_MCP_COMM, Singulator_U1U2_Jam.

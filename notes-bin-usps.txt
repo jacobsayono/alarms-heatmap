@@ -1,0 +1,31 @@
+show kiran's code vs. my code, how to merge
+timestamp to datetime conversion duplicate in our code
+validation: if trigger_counts[alarm_id] > 0 duplicates in our code that can be merged seamlessly
+
+
+show pictures
+correct-cc-trigger.png
+correct-cc-time.png
+
+show bin-timing experiment
+bin-timing.jpg
+bin-timing.xlsx
+
+show alarms-organization.xlsx
+
+important note to point out:
+double chute — if one available but one full, technically there is still no downtime, because conveyers are still moving
+let's clearly define "downtime" exactly how usps would like.
+
+only alarms for bins we get:
+Bin_BLeft_Full
+Bin_BLeft_BinNotPresentTimeout
+Bin_BLeft_BinNotResumed Timout
+
+unsure:
+OutputBPaused
+OutputBJam
+
+questions for gabe:
+what does usps want from us exactly?
+how can i help?

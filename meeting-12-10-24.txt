@@ -1,0 +1,23 @@
+- secondary:
+	- s1, s3, s8 U1U2 pe jam
+- primary:
+	- matrix bed belt
+	
+- conditional primary (e.g. if total downtime is more than x mins then it's primary):
+	- cc heartbeats
+
+- exporting # of packages to csv file:
+	- rep vol long
+	- rep vol
+	- rep routing
+	- rep rou by dest
+	
+- TODO:
+	- apply full alarms list into the organized spreadsheet
+	- sample data visualization
+	- track # of packages and its destination name
+	
+- notes to inform/ask team:
+	- heartbeat vs. heartbeat_1?
+	- bins 7-50 does not send alarm message when state is full
+	- other alarms not getting logged (transfer conveyer, recirc not avail)

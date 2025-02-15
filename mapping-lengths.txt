@@ -1,0 +1,12 @@
+singulator:
+D - 35"
+F - 48"
+Visicon - 250"
+Aligner - 180"
+PG - 18"
+G - 32"
+
+sorter:
+convA - 65" (36" from pe1A to pe1B)
+convB - 80" chute, 50" cc (77 of these)
+convC - 50"
