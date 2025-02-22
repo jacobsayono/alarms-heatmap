@@ -42,7 +42,6 @@ for _, row in df.iterrows():
     elif point_val == 0 and alarm_id in trigger_counts:
         # only process if there was a trigger before this resolution
 
-
         # my validation
         if trigger_counts[alarm_id] > 0:
             time_diff = timestamp - trigger_time  # calc time difference
