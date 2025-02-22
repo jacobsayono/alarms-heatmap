@@ -59,14 +59,14 @@ row_col_mapping = {
 "PS7B.Fault": (26,0),
 "PS8B.Fault": (27,0),
 
-# "SINGULATOR1.Singulator_U1U2_Jam": (5 ,1),
+"SINGULATOR1.Singulator_U1U2_Jam": (5 ,1),
 "SINGULATOR2.Singulator_U1U2_Jam": (6 ,1),
 "SINGULATOR3.Singulator_U1U2_Jam": (12,1),
 "SINGULATOR4.Singulator_U1U2_Jam": (13,1),
 "SINGULATOR5.Singulator_U1U2_Jam": (19,1),
 "SINGULATOR6.Singulator_U1U2_Jam": (20,1),
 "SINGULATOR7.Singulator_U1U2_Jam": (26,1),
-# "SINGULATOR8.Singulator_U1U2_Jam": (27,1),
+"SINGULATOR8.Singulator_U1U2_Jam": (27,1),
 
 "SINGULATOR1.D0_MOTR_OVRLD": (5 ,2),
 "SINGULATOR2.D0_MOTR_OVRLD": (6 ,2),
@@ -167,32 +167,32 @@ row_col_mapping = {
 "SINGULATOR7.VIS_PHTEYE_JAM_FLT": (26,11),
 "SINGULATOR8.VIS_PHTEYE_JAM_FLT": (27,11),
 
-# "SINGULATOR1.MG1_MOTR_OVRLD": (5 ,12),
-# "SINGULATOR2.MG1_MOTR_OVRLD": (6 ,12),
-# "SINGULATOR3.MG1_MOTR_OVRLD": (12,12),
-# "SINGULATOR4.MG1_MOTR_OVRLD": (13,12),
-# "SINGULATOR5.MG1_MOTR_OVRLD": (19,12),
-# "SINGULATOR6.MG1_MOTR_OVRLD": (20,12),
-# "SINGULATOR7.MG1_MOTR_OVRLD": (26,12),
-# "SINGULATOR8.MG1_MOTR_OVRLD": (27,12),
+"SINGULATOR1.MG1_PHTEYE_JAM": (5 ,12),
+"SINGULATOR2.MG1_PHTEYE_JAM": (6 ,12),
+"SINGULATOR3.MG1_PHTEYE_JAM": (12,12),
+"SINGULATOR4.MG1_PHTEYE_JAM": (13,12),
+"SINGULATOR5.MG1_PHTEYE_JAM": (19,12),
+"SINGULATOR6.MG1_PHTEYE_JAM": (20,12),
+"SINGULATOR7.MG1_PHTEYE_JAM": (26,12),
+"SINGULATOR8.MG1_PHTEYE_JAM": (27,12),
 
-# "SINGULATOR1.MG2_MOTR_OVRLD": (5 ,13),
-# "SINGULATOR2.MG2_MOTR_OVRLD": (6 ,13),
-# "SINGULATOR3.MG2_MOTR_OVRLD": (12,13),
-# "SINGULATOR4.MG2_MOTR_OVRLD": (13,13),
-# "SINGULATOR5.MG2_MOTR_OVRLD": (19,13),
-# "SINGULATOR6.MG2_MOTR_OVRLD": (20,13),
-# "SINGULATOR7.MG2_MOTR_OVRLD": (26,13),
-# "SINGULATOR8.MG2_MOTR_OVRLD": (27,13),
+"SINGULATOR1.MG2_PHTEYE_JAM": (5 ,13),
+"SINGULATOR2.MG2_PHTEYE_JAM": (6 ,13),
+"SINGULATOR3.MG2_PHTEYE_JAM": (12,13),
+"SINGULATOR4.MG2_PHTEYE_JAM": (13,13),
+"SINGULATOR5.MG2_PHTEYE_JAM": (19,13),
+"SINGULATOR6.MG2_PHTEYE_JAM": (20,13),
+"SINGULATOR7.MG2_PHTEYE_JAM": (26,13),
+"SINGULATOR8.MG2_PHTEYE_JAM": (27,13),
 
-# "SINGULATOR1.MG3_MOTR_OVRLD": (5 ,14),
-# "SINGULATOR2.MG3_MOTR_OVRLD": (6 ,14),
-# "SINGULATOR3.MG3_MOTR_OVRLD": (12,14),
-# "SINGULATOR4.MG3_MOTR_OVRLD": (13,14),
-# "SINGULATOR5.MG3_MOTR_OVRLD": (19,14),
-# "SINGULATOR6.MG3_MOTR_OVRLD": (20,14),
-# "SINGULATOR7.MG3_MOTR_OVRLD": (26,14),
-# "SINGULATOR8.MG3_MOTR_OVRLD": (27,14),
+"SINGULATOR1.MG3_PHTEYE_JAM": (5 ,14),
+"SINGULATOR2.MG3_PHTEYE_JAM": (6 ,14),
+"SINGULATOR3.MG3_PHTEYE_JAM": (12,14),
+"SINGULATOR4.MG3_PHTEYE_JAM": (13,14),
+"SINGULATOR5.MG3_PHTEYE_JAM": (19,14),
+"SINGULATOR6.MG3_PHTEYE_JAM": (20,14),
+"SINGULATOR7.MG3_PHTEYE_JAM": (26,14),
+"SINGULATOR8.MG3_PHTEYE_JAM": (27,14),
 
 "SINGULATOR1.MG4_PHTEYE_JAM": (5 ,15),
 "SINGULATOR2.MG4_PHTEYE_JAM": (6 ,15),
@@ -203,14 +203,14 @@ row_col_mapping = {
 "SINGULATOR7.MG4_PHTEYE_JAM": (26,15),
 "SINGULATOR8.MG4_PHTEYE_JAM": (27,15),
 
-# "SINGULATOR1.AL0_MOTR_OVRLD": (5 ,16),
-# "SINGULATOR2.AL0_MOTR_OVRLD": (6 ,16),
-# "SINGULATOR3.AL0_MOTR_OVRLD": (12,16),
-# "SINGULATOR4.AL0_MOTR_OVRLD": (13,16),
-# "SINGULATOR5.AL0_MOTR_OVRLD": (19,16),
-# "SINGULATOR6.AL0_MOTR_OVRLD": (20,16),
-# "SINGULATOR7.AL0_MOTR_OVRLD": (26,16),
-# "SINGULATOR8.AL0_MOTR_OVRLD": (27,16),
+"SINGULATOR1.AL0_PHTEYE_JAM": (5 ,16),
+"SINGULATOR2.AL0_PHTEYE_JAM": (6 ,16),
+"SINGULATOR3.AL0_PHTEYE_JAM": (12,16),
+"SINGULATOR4.AL0_PHTEYE_JAM": (13,16),
+"SINGULATOR5.AL0_PHTEYE_JAM": (19,16),
+"SINGULATOR6.AL0_PHTEYE_JAM": (20,16),
+"SINGULATOR7.AL0_PHTEYE_JAM": (26,16),
+"SINGULATOR8.AL0_PHTEYE_JAM": (27,16),
 
 "SINGULATOR1.PG1_PHTEYE_JAM": (5 ,17),
 "SINGULATOR2.PG1_PHTEYE_JAM": (6 ,17),
@@ -2958,8 +2958,8 @@ for alarm_id, trigger in trigger_counts.items():
         trigger_values[(row, col)] = trigger
 
 # set custom row and column labels
-table_df.index = ['L', 'R', 'O_A', 'Jam', 'Full', 'S1', 'S2', 'Full', 'Jam', 'Conv12', 'Jam', 'Full', 'S3', 'S4', 'Full', 'Jam', 'Conv23', 'Jam', 'Full', 'S5', 'S6', 'Full', 'Jam', 'Conv34', 'Jam', 'Full', 'S7', 'S8', 'Full', 'Jam', 'O_B', 'R', 'L']
-table_df.columns = ['PS', 'UU', 'D0', 'D1', 'D2', 'D3', 'D4', 'D5', 'F1', 'F2', 'F3', 'VIS', '1', '2', '3', '4', '0', 'P', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '1', '2', '3', '4', '5', '6', '7', 'A1', 'B1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', 'Chain', 'Shoe', 'B4']
+table_df.index = ['Left Bin', 'Right Bin / Takeaway', 'CC Output A', 'Sorter 1 Chute Jam', 'Sorter 1 Chute Full', 'Strand 1', 'Strand 2', 'Sorter 2 Chute Full', 'Sorter 2 Chute Jam', 'CC Conv12 PE', 'Sorter 3 Chute Jam', 'Sorter 3 Chute Full', 'Strand 3', 'Strand 4', 'Sorter 4 Chute Full', 'Sorter 4 Chute Jam', 'CC Conv23 PE', 'Sorter 5 Chute Jam', 'Sorter 5 Chute Full', 'Strand 5', 'Strand 6', 'Sorter 6 Chute Full', 'Sorter 6 Chute Jam', 'CC Conv34 PE', 'Sorter 7 Chute Jam', 'Sorter 7 Chute Full', 'Strand 7', 'Strand 8', 'Sorer 8 Chute Full', 'Sorter 8 Chute Jam', 'CC Output B', 'Right Bin / Takeaway', 'Left Bin']
+table_df.columns = ['Entrance', 'U1/U2', 'D-0', 'D-1', 'D-2', 'D-3', 'D-4', 'D-5', 'F1', 'F-2', 'F-3', 'VISICON MATRIX', 'MG-1', 'MG-2', 'MG-3', 'MG-4', 'AL-0', 'PG-1', 'G-1', 'G-2', 'G-3', 'G-4', 'G-5', 'G-6', 'G-7', 'G-8', 'G-9', 'G-10', 'TC-1', 'TC-2', 'TC-3', 'TC-4', 'TC-5', 'TC-6', 'TC-7', 'ConvA PE1', 'ConvB PE1', 'Face & Flatten / CC01', 'Relabel / CC02', 'SIPS 16 / CC03', 'SIPS 17 / CC04', 'SIPS 15 / CC05', 'CC06', 'CC07', 'CC08', 'CC09', 'CC10', 'CC11', 'CC12', 'CC13', 'CC14', 'CC15', 'CC16', 'CC17', 'CC18', 'CC19', 'CC20', 'CC21', 'CC22', 'CC23', 'CC24', 'CC25', 'CC26', 'CC27', 'CC28', 'CC29', 'CC30', 'CC31', 'CC32', 'SIPS 11 / CC33', 'SIPS 12 / CC34', 'SIPS 13 / CC35', 'CC36', 'CC37', 'CC38', 'CC39', 'CC40', 'CC41', 'CC42', 'CC43', 'CC44', 'CC45', 'CC46', 'CC47', 'CC48', 'CC49', 'CC50', 'CC51', 'CC52', 'CC53', 'CC54', 'CC55', 'CC56', 'CC57', 'CC58', 'CC59', 'CC60', 'CC61', 'CC62', 'CC63', 'CC64', 'CC65', 'CC66', 'CC67', 'CC68', 'CC69', 'CC70', 'CC71', 'CC72', 'CC73', 'CC74', 'CC75', 'RECIRC-A / CC76', 'RECIRC-B / CC77', 'Chain Stretch', 'Shoe Check', 'ConvB PE4']
 
 # get absolute count range for color mapping
 min_count = 0  # min trigger count
@@ -2998,7 +2998,7 @@ for (row, col), count in trigger_values.items():
 
 
 # figure size
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 6), facecolor='#5E89C3')
 ax.axis('tight')
 ax.axis('off')
 
@@ -3012,17 +3012,66 @@ tbl = table(ax, table_df, loc='center', colWidths=[0.02]*117)
 
 
 tbl.auto_set_font_size(False)
-tbl.set_fontsize(5)
+tbl.set_fontsize(6)
 tbl.scale(0.5, 0.5)
 
-# apply colors to the table cells
+# # apply colors to the table cells
+# for (i, j), cell in tbl.get_celld().items():
+#     i = i - 1  # for some reason my code colors the headers when all the other versions of code doesn't. and for some reason this version needs this get_celld() paragraph
+#     if (i, j) in trigger_values:  # check if this cell has a trigger value
+#         cell.set_facecolor(cell_colours[i, j])
+#     else:
+#         cell.set_facecolor('#AAAAAA')
+#     cell.set_edgecolor('none')  # add black borders for more visibility?
+
+# compute the min color for 0 triggers (so we can use it wherever the alarm exists but has no triggers).
+min_color_hex = mcolors.to_hex(cmap(norm(0)))
+
 for (i, j), cell in tbl.get_celld().items():
-    i = i - 1  # for some reason my code colors the headers when all the other versions of code doesn't. and for some reason this version needs this get_celld() paragraph
-    if (i, j) in trigger_values:  # check if this cell has a time value
-        cell.set_facecolor(cell_colours[i, j])
+    if i == 0:
+        # rotate text 90 degrees
+        cell.get_text().set_rotation(-45)
+        # adjust alignment so text reads neatly along the column
+        cell.get_text().set_ha('right')
+        cell.get_text().set_va('bottom')
+
+    if j == -1:
+        # rotate text 90 degrees
+        # cell.get_text().set_rotation(-45)
+        # adjust alignment so text reads neatly along the column
+        cell.get_text().set_ha('right')
+        cell.get_text().set_va('bottom')
+
+    # table() adds an extra header row, so subtract 1 from i
+    i_adjusted = i - 1
+
+    # border width
+    cell.set_linewidth(0.2)
+    
+    # If this is still a header row (i.e., < 0), skip it:
+    # if i_adjusted < 0:
+    #     continue
+
+    # if j < 0:
+    #     continue
+
+    # check if (row, col) is in any of our row_col_mapping values
+    if (i_adjusted, j) in row_col_mapping.values():
+        # if we actually have a recorded trigger count, color from the cell_colours
+        if (i_adjusted, j) in trigger_values:
+            cell.set_facecolor(cell_colours[i_adjusted, j])
+            cell.set_edgecolor('black')
+            
+        else:
+            # alarm is mapped but has no triggers => use min color (or white)
+            cell.set_facecolor(min_color_hex)
+            cell.set_edgecolor('black')
     else:
-        cell.set_facecolor('#FFFFFF')  # default color for empty cells
-    cell.set_edgecolor('black')  # add black borders for more visibility?
+        # not in row_col_mapping => color grey
+        cell.set_facecolor('#5E89C3')
+        cell.set_edgecolor('none')
+
+    
 
 
 # add colorbar on the right to indicate the feature (time range) from lo to hi
