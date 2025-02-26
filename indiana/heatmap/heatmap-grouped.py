@@ -5,47 +5,55 @@ from pandas.plotting import table
 import matplotlib.colors as mcolors
 import sys
 
-if len(sys.argv) != 2:
-    print("Usage: python3 script.py [filename.xlsx]")
-    sys.exit(1)
-
+# Read Excel file
 file_path = sys.argv[1]
-
 df = pd.read_excel(file_path)
 
-df['timestamp'] = pd.to_datetime(df['timestamp'])
-df['log_action'] = df['log_action'].astype(str).fillna('0')
+# Count alarm triggers (adjust column name to match your data)
+trigger_counts = df['alarm_id'].value_counts().to_dict()
 
-df = df.sort_values(by='timestamp')
+# Subsystem configuration
+subsystem_config = {
+    'Singulators': {
+        'color_map': 'Reds_r',
+        'min': 0,
+        'max': 20
+    },
+    'Transfer Conveyors': {
+        'color_map': 'Blues_r',
+        'min': 0,
+        'max': 15
+    },
+    'Shoesorters': {
+        'color_map': 'Purples_r',
+        'min': 0,
+        'max': 25
+    },
+    'Collection Conveyors': {
+        'color_map': 'Greens_r',
+        'min': 0,
+        'max': 30
+    },
+    'ACT Conveyors': {
+        'color_map': 'Greys_r',
+        'min': 0,
+        'max': 10
+    }
+}
 
-# init dict for 2 features
-total_time_differences = {}
-trigger_counts = {}
-
-# iter thru rows of data table
-for _, row in df.iterrows():
-    alarm_id = row['alarm_id']
-    log_action = row['log_action']
-    timestamp = row['timestamp']
-
-    # init trigger time if it's the first time seeing this alarm_id
-    if alarm_id not in trigger_counts:
-        trigger_counts[alarm_id] = 0
-        total_time_differences[alarm_id] = pd.Timedelta(0)
-
-    # when a trigger is encountered (log_action = G)
-    if log_action == 'G':
-        trigger_counts[alarm_id] += 1
-        trigger_time = timestamp
-
-    # when a resolution is encountered (log_action = R)
-    elif log_action == 'R' and alarm_id in trigger_counts:
-        # only process if there was a trigger before this resolution
-
-        # my validation
-        if trigger_counts[alarm_id] > 0:
-            time_diff = timestamp - trigger_time  # calc time difference
-            total_time_differences[alarm_id] += time_diff  # add to total time
+def get_subsystem(alarm_id):
+    """Categorize alarms into subsystems based on their names"""
+    alarm_id = alarm_id.lower()
+    if 'singulator' in alarm_id:
+        return 'Singulators'
+    elif alarm_id.startswith('tc'):
+        return 'Transfer Conveyors'
+    elif alarm_id.startswith('shoesorter'):
+        return 'Shoesorters'
+    elif alarm_id.startswith('cc'):
+        return 'Collection Conveyors'
+    else:
+        return 'ACT Conveyors'
 
 # map row/col of our MaRS system
 row_col_mapping = {
@@ -59,14 +67,14 @@ row_col_mapping = {
 "PS7B.Fault": (26,0),
 "PS8B.Fault": (27,0),
 
-"SINGULATOR1.Singulator_U1U2_Jam": (5 ,1),
-"SINGULATOR2.Singulator_U1U2_Jam": (6 ,1),
-"SINGULATOR3.Singulator_U1U2_Jam": (12,1),
-"SINGULATOR4.Singulator_U1U2_Jam": (13,1),
-"SINGULATOR5.Singulator_U1U2_Jam": (19,1),
-"SINGULATOR6.Singulator_U1U2_Jam": (20,1),
-"SINGULATOR7.Singulator_U1U2_Jam": (26,1),
-"SINGULATOR8.Singulator_U1U2_Jam": (27,1),
+# "SINGULATOR1.Singulator_U1U2_Jam": (5 ,1),
+# "SINGULATOR2.Singulator_U1U2_Jam": (6 ,1),
+# "SINGULATOR3.Singulator_U1U2_Jam": (12,1),
+# "SINGULATOR4.Singulator_U1U2_Jam": (13,1),
+# "SINGULATOR5.Singulator_U1U2_Jam": (19,1),
+# "SINGULATOR6.Singulator_U1U2_Jam": (20,1),
+# "SINGULATOR7.Singulator_U1U2_Jam": (26,1),
+# "SINGULATOR8.Singulator_U1U2_Jam": (27,1),
 
 "SINGULATOR1.D0_MOTR_OVRLD": (5 ,2),
 "SINGULATOR2.D0_MOTR_OVRLD": (6 ,2),
@@ -2944,143 +2952,94 @@ row_col_mapping = {
 
 }
 
-# "HH:MM:SS" to seconds
-def time_to_seconds(time_str):
-    h, m, s = map(int, time_str.split(':'))
-    return h * 3600 + m * 60 + s
-
-# seconds to "HH:MM:SS"
-def seconds_to_hms(seconds):
-    hours = int(seconds // 3600)
-    minutes = int((seconds % 3600) // 60)
-    seconds = int(seconds % 60)
-    return f"{hours:02}:{minutes:02}:{seconds:02}"
-
-# create dataframe with appropriate size (indiana 22 cc rows, 77 cc columns) for heatmap generation
-rows = 33  # [0,32]
-cols = 117  # [0,116]
+# Create DataFrame for heatmap
+rows = 33
+cols = 117
 table_df = pd.DataFrame("", index=range(rows), columns=range(cols), dtype=object)
 
-time_values = {}
-for alarm_id, total_time in total_time_differences.items():
-    if alarm_id in row_col_mapping:
-        row, col = row_col_mapping[alarm_id]
-        # table_df.loc[row, col] = ""
-        # table_df.loc[row, col] = total_time
-        time_values[(row, col)] = total_time.total_seconds()  # convert to seconds
+# Categorize alarms and calculate max values per subsystem
+subsystem_data = {sub: {'counts': [], 'positions': []} for sub in subsystem_config}
+for alarm_id, (row, col) in row_col_mapping.items():
+    subsystem = get_subsystem(alarm_id)
+    count = trigger_counts.get(alarm_id, 0)
+    subsystem_data[subsystem]['counts'].append(count)
+    subsystem_data[subsystem]['positions'].append((row, col))
+
+# Generate color mappings for each subsystem
+subsystem_colors = {}
+for sub, config in subsystem_config.items():
+    counts = subsystem_data[sub]['counts']
+    max_count = max(counts) if counts else 1
+    config['max'] = max(config['max'], max_count)  # Use configured max or data max
+    norm = mcolors.Normalize(vmin=config['min'], vmax=config['max'])
+    cmap = plt.get_cmap(config['color_map'])
+    subsystem_colors[sub] = {'norm': norm, 'cmap': cmap}
+
+# Create color matrix
+cell_colours = np.full((rows, cols), '#5E89C3')  # Default background color
+for sub, data in subsystem_data.items():
+    config = subsystem_config[sub]
+    for (row, col), count in zip(data['positions'], data['counts']):
+        norm = subsystem_colors[sub]['norm']
+        cmap = subsystem_colors[sub]['cmap']
+        color = cmap(norm(count))
+        cell_colours[row, col] = mcolors.to_hex(color)
 
 # set custom row and column labels
 table_df.index = ['Left Bin', 'Right Bin / Takeaway', 'CC Output A', 'Sorter 1 Chute Jam', 'Sorter 1 Chute Full', 'Strand 1', 'Strand 2', 'Sorter 2 Chute Full', 'Sorter 2 Chute Jam', 'CC Conv12 PE', 'Sorter 3 Chute Jam', 'Sorter 3 Chute Full', 'Strand 3', 'Strand 4', 'Sorter 4 Chute Full', 'Sorter 4 Chute Jam', 'CC Conv23 PE', 'Sorter 5 Chute Jam', 'Sorter 5 Chute Full', 'Strand 5', 'Strand 6', 'Sorter 6 Chute Full', 'Sorter 6 Chute Jam', 'CC Conv34 PE', 'Sorter 7 Chute Jam', 'Sorter 7 Chute Full', 'Strand 7', 'Strand 8', 'Sorer 8 Chute Full', 'Sorter 8 Chute Jam', 'CC Output B', 'Right Bin / Takeaway', 'Left Bin']
 table_df.columns = ['Entrance', 'U1/U2', 'D-0', 'D-1', 'D-2', 'D-3', 'D-4', 'D-5', 'F1', 'F-2', 'F-3', 'VISICON MATRIX', 'MG-1', 'MG-2', 'MG-3', 'MG-4', 'AL-0', 'PG-1', 'G-1', 'G-2', 'G-3', 'G-4', 'G-5', 'G-6', 'G-7', 'G-8', 'G-9', 'G-10', 'TC-1', 'TC-2', 'TC-3', 'TC-4', 'TC-5', 'TC-6', 'TC-7', 'ConvA PE1', 'ConvB PE1', 'Face & Flatten / CC01', 'Relabel / CC02', 'SIPS 16 / CC03', 'SIPS 17 / CC04', 'SIPS 15 / CC05', 'CC06', 'CC07', 'CC08', 'CC09', 'CC10', 'CC11', 'CC12', 'CC13', 'CC14', 'CC15', 'CC16', 'CC17', 'CC18', 'CC19', 'CC20', 'CC21', 'CC22', 'CC23', 'CC24', 'CC25', 'CC26', 'CC27', 'CC28', 'CC29', 'CC30', 'CC31', 'CC32', 'SIPS 11 / CC33', 'SIPS 12 / CC34', 'SIPS 13 / CC35', 'CC36', 'CC37', 'CC38', 'CC39', 'CC40', 'CC41', 'CC42', 'CC43', 'CC44', 'CC45', 'CC46', 'CC47', 'CC48', 'CC49', 'CC50', 'CC51', 'CC52', 'CC53', 'CC54', 'CC55', 'CC56', 'CC57', 'CC58', 'CC59', 'CC60', 'CC61', 'CC62', 'CC63', 'CC64', 'CC65', 'CC66', 'CC67', 'CC68', 'CC69', 'CC70', 'CC71', 'CC72', 'CC73', 'CC74', 'CC75', 'RECIRC-A / CC76', 'RECIRC-B / CC77', 'Chain Stretch', 'Shoe Check', 'ConvB PE4']
 
-# get absolute time range for color mapping (in seconds)
-min_time = 0  # set min time to 0 seconds (00:00:00)
-max_time = max(time_values.values())  # max time is based on the max total time of any given input data
-# max_time = 600  # or custom max val set to 24 hours in seconds (24:00:00)
-norm = mcolors.Normalize(vmin=min_time, vmax=max_time)
-cmap = plt.colormaps.get_cmap("gnuplot2_r")  # different coloring on cmap() documentation
-
-# create cell colours based on time values, directly apply color map to the total time in seconds
-cell_colours = np.full((rows, cols), '#FFFFFF')  # init the color grid
-for (row, col), time_sec in time_values.items():
-    color = cmap(norm(time_sec))  # get color for the current time value
-    cell_colours[row, col] = mcolors.to_hex(color)  # convert to hex
-
-# cell_colours = np.full((rows, cols), '#FFFFFF')  # init the color grid
-# for alarm_id, total_time in total_time_differences.items():
-#     if alarm_id in row_col_mapping:
-#         row, col = row_col_mapping[alarm_id]
-#         time_sec = total_time.total_seconds()  # convert timedelta to seconds
-#         color = cmap(norm(time_sec))          # get color for the time value
-#         cell_colours[row, col] = mcolors.to_hex(color)  # convert to hex
-
-
-# figure size
-fig, ax = plt.subplots(figsize=(10, 6), facecolor='#5E89C3')
+# Create main heatmap table
+fig, ax = plt.subplots(figsize=(10, 6), facecolor='white')
+plt.suptitle("MaRS Alarms Heatmap", fontsize=20, y=0.95)
 ax.axis('tight')
 ax.axis('off')
-
-# fig.suptitle("Alarm Events Heatmap", fontsize=16)  # title for the entire figure
-# ax.set_title("Total Downtime by Photo-Eye Jams", fontsize=14)  # title for the subplot
-
-
-
-# heatmap's col widths
 tbl = table(ax, table_df, loc='center', colWidths=[0.02]*117)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(6)
 tbl.scale(0.5, 0.5)
 
-min_color_hex = mcolors.to_hex(cmap(norm(0)))
-
-# apply colors to the table cells
-# for (i, j), cell in tbl.get_celld().items():
-#     i = i - 1  # for some reason my code colors the headers when all the other versions of code doesn't. and for some reason this version needs this get_celld() paragraph
-#     if (i, j) in time_values:  # check if this cell has a time value
-#         cell.set_facecolor(cell_colours[i, j])
-#     else:
-#         cell.set_facecolor('#FFFFFF')  # default color for empty cells
-#     cell.set_edgecolor('black')  # add black borders for more visibility?
-
+# Apply cell colors and formatting
 for (i, j), cell in tbl.get_celld().items():
-    if i == 0:
-        # rotate text 90 degrees
-        cell.get_text().set_rotation(-45)
-        # adjust alignment so text reads neatly along the column
-        cell.get_text().set_ha('right')
-        cell.get_text().set_va('bottom')
-
-    if j == -1:
-        # rotate text 90 degrees
-        # cell.get_text().set_rotation(-45)
-        # adjust alignment so text reads neatly along the column
-        cell.get_text().set_ha('right')
-        cell.get_text().set_va('bottom')
-
-    # table() adds an extra header row, so subtract 1 from i
-    i_adjusted = i - 1
-
-    # border width
+    i_adjusted = i - 1  # Account for header row
     cell.set_linewidth(0.2)
+    cell.set_edgecolor('none')
     
-    # If this is still a header row (i.e., < 0), skip it:
-    # if i_adjusted < 0:
-    #     continue
+    if i == 0:  # Rotate column headers
+        cell.get_text().set_rotation(-45)
+        cell.get_text().set_ha('right')
+        cell.get_text().set_va('bottom')
 
-    # if j < 0:
-    #     continue
+    if (i_adjusted >= 0) and (j >= 0):
+        cell_color = cell_colours[i_adjusted, j]
+        cell.set_facecolor(cell_color)
+        cell.set_edgecolor('black')
 
-    # check if (row, col) is in any of our row_col_mapping values
-    if (i_adjusted, j) in row_col_mapping.values():
-        # if we actually have a recorded trigger count, color from the cell_colours
-        if (i_adjusted, j) in time_values:
-            cell.set_facecolor(cell_colours[i_adjusted, j])
-            cell.set_edgecolor('black')
-            
-        else:
-            # alarm is mapped but has no triggers => use min color (or white)
-            cell.set_facecolor(min_color_hex)
-            cell.set_edgecolor('black')
-    else:
-        # not in row_col_mapping => color grey
-        cell.set_facecolor('#5E89C3')
-        cell.set_edgecolor('none')
+# Create individual horizontal colorbars at the bottom
+cbar_height = 0.03  # Height of each colorbar
+cbar_width_per = 0.15  # Width of each colorbar
+cbar_spacing = 0.02  # Spacing between colorbars
+bottom_position = 0.05  # Distance from bottom
+left_start = 0.1  # Starting left position
 
-# add a colorbar on the right to indicate the time range
-cbar_ax = fig.add_axes([0.1, 0.1, 0.8, 0.02])  # Position the colorbar on the right
-sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
-sm.set_array([])  # empty array for ScalarMappable
-cbar = fig.colorbar(sm, cax=cbar_ax, label='Time (HH:MM:SS)', orientation='horizontal')
+current_x = left_start
+for sub, config in subsystem_config.items():
+    if not subsystem_data[sub]['positions']:
+        continue
+        
+    # Create colorbar axis
+    cbar_ax = fig.add_axes([current_x, bottom_position, cbar_width_per, cbar_height])
+    sm = plt.cm.ScalarMappable(cmap=subsystem_colors[sub]['cmap'],
+                              norm=subsystem_colors[sub]['norm'])
+    sm.set_array([])
+    
+    # Create horizontal colorbar
+    cbar = plt.colorbar(sm, cax=cbar_ax, orientation='horizontal')
+    cbar.set_label(sub.capitalize(), fontsize=10, rotation=0, labelpad=5)
+    cbar.ax.tick_params(labelsize=8)  # Adjust tick label size
+    
+    current_x += cbar_width_per + cbar_spacing
 
-# set ticks on the colorbar
-# cbar.set_ticks([0, 200, 400, 600])  # set ticks for 0, 12:00:00, and 24:00:00
-# cbar.set_ticklabels([seconds_to_hms(0), seconds_to_hms(200), seconds_to_hms(400), seconds_to_hms(600)])  # format ticks as HH:MM:SS
-# cbar.set_ticks([min_time, (max_time/3), (2*max_time/3), max_time])  # set ticks for min, mid, and max trigger counts
-cbar.set_ticks([min_time, (max_time/10), (2*max_time/10), (3*max_time/10), (4*max_time/10), (5*max_time/10), (6*max_time/10), (7*max_time/10), (8*max_time/10), (9*max_time/10), max_time])  # set ticks for min, mid, and max trigger counts
-# cbar.set_ticklabels([seconds_to_hms(min_time), seconds_to_hms(max_time/3), seconds_to_hms(2*max_time/3), seconds_to_hms(max_time)])  # format ticks as integers
-cbar.set_ticklabels([seconds_to_hms(min_time), seconds_to_hms(max_time/10), seconds_to_hms(2*max_time/10), seconds_to_hms(3*max_time/10), seconds_to_hms(4*max_time/10), seconds_to_hms(5*max_time/10), seconds_to_hms(6*max_time/10), seconds_to_hms(7*max_time/10), seconds_to_hms(8*max_time/10), seconds_to_hms(9*max_time/10), seconds_to_hms(max_time)])  # format ticks as integers
-
-
-
-# show figure
+# Adjust main plot margins to accommodate colorbars
+plt.subplots_adjust(bottom=0.15)
 plt.show()
