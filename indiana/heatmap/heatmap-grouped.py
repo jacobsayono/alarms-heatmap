@@ -17,27 +17,27 @@ subsystem_config = {
     'Singulators': {
         'color_map': 'Reds_r',
         'min': 0,
-        'max': 20
+        'max': 1
     },
     'Transfer Conveyors': {
         'color_map': 'Blues_r',
         'min': 0,
-        'max': 15
+        'max': 1
     },
     'Shoesorters': {
         'color_map': 'Purples_r',
         'min': 0,
-        'max': 25
+        'max': 1
     },
     'Collection Conveyors': {
         'color_map': 'Greens_r',
         'min': 0,
-        'max': 30
+        'max': 1
     },
     'ACT Conveyors': {
         'color_map': 'Greys_r',
         'min': 0,
-        'max': 10
+        'max': 1
     }
 }
 
@@ -67,14 +67,15 @@ row_col_mapping = {
 "PS7B.Fault": (26,0),
 "PS8B.Fault": (27,0),
 
-# "SINGULATOR1.Singulator_U1U2_Jam": (5 ,1),
-# "SINGULATOR2.Singulator_U1U2_Jam": (6 ,1),
-# "SINGULATOR3.Singulator_U1U2_Jam": (12,1),
-# "SINGULATOR4.Singulator_U1U2_Jam": (13,1),
-# "SINGULATOR5.Singulator_U1U2_Jam": (19,1),
-# "SINGULATOR6.Singulator_U1U2_Jam": (20,1),
-# "SINGULATOR7.Singulator_U1U2_Jam": (26,1),
-# "SINGULATOR8.Singulator_U1U2_Jam": (27,1),
+# added * to make it value 0
+"SINGULATOR1.Singulator_U1U2_Jam*": (5 ,1),
+"SINGULATOR2.Singulator_U1U2_Jam*": (6 ,1),
+"SINGULATOR3.Singulator_U1U2_Jam*": (12,1),
+"SINGULATOR4.Singulator_U1U2_Jam*": (13,1),
+"SINGULATOR5.Singulator_U1U2_Jam*": (19,1),
+"SINGULATOR6.Singulator_U1U2_Jam*": (20,1),
+"SINGULATOR7.Singulator_U1U2_Jam*": (26,1),
+"SINGULATOR8.Singulator_U1U2_Jam*": (27,1),
 
 "SINGULATOR1.D0_MOTR_OVRLD": (5 ,2),
 "SINGULATOR2.D0_MOTR_OVRLD": (6 ,2),
@@ -2973,7 +2974,7 @@ for sub, config in subsystem_config.items():
     config['max'] = max(config['max'], max_count)  # Use configured max or data max
     norm = mcolors.Normalize(vmin=config['min'], vmax=config['max'])
     cmap = plt.get_cmap(config['color_map'])
-    subsystem_colors[sub] = {'norm': norm, 'cmap': cmap}
+    subsystem_colors[sub] = {'norm': norm, 'cmap': mcolors.ListedColormap(cmap(np.linspace(0, 0.7, 256)))}
 
 # Create color matrix
 cell_colours = np.full((rows, cols), '#5E89C3')  # Default background color
@@ -3004,11 +3005,11 @@ for (i, j), cell in tbl.get_celld().items():
     i_adjusted = i - 1  # Account for header row
     cell.set_linewidth(0.2)
     cell.set_edgecolor('none')
+    cell.get_text().set_ha('right')
+    cell.get_text().set_va('bottom')
     
     if i == 0:  # Rotate column headers
         cell.get_text().set_rotation(-45)
-        cell.get_text().set_ha('right')
-        cell.get_text().set_va('bottom')
 
     if (i_adjusted >= 0) and (j >= 0):
         cell_color = cell_colours[i_adjusted, j]
